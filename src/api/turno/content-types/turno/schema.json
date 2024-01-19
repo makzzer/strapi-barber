@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "turnos",
+  "info": {
+    "singularName": "turno",
+    "pluralName": "turnos",
+    "displayName": "Turno",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fechaReserva": {
+      "type": "datetime"
+    },
+    "servicio": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::producto.producto"
+    },
+    "diaReserva": {
+      "type": "date"
+    },
+    "barbero": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::barbero.barbero"
+    },
+    "admin_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    },
+    "estadoPago": {
+      "type": "string"
+    }
+  }
+}

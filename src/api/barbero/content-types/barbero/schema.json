@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "barberos",
+  "info": {
+    "singularName": "barbero",
+    "pluralName": "barberos",
+    "displayName": "Barbero"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    }
+  }
+}
