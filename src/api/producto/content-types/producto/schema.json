@@ -4,7 +4,7 @@
   "info": {
     "singularName": "producto",
     "pluralName": "productos",
-    "displayName": "servicio",
+    "displayName": "producto",
     "description": ""
   },
   "options": {
@@ -20,6 +20,10 @@
     },
     "precio": {
       "type": "integer"
+    },
+    "senia": {
+      "type": "integer",
+      "default": 2000
     }
   }
 }

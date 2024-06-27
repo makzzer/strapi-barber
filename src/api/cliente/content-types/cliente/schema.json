@@ -4,14 +4,15 @@
   "info": {
     "singularName": "cliente",
     "pluralName": "clientes",
-    "displayName": "Cliente"
+    "displayName": "Cliente",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Nombre": {
+    "nombre": {
       "type": "string"
     },
     "apellido": {
@@ -22,6 +23,14 @@
     },
     "password": {
       "type": "password"
+    },
+    "telefono": {
+      "type": "integer"
+    },
+    "turnos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::turno.turno"
     }
   }
 }

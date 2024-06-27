@@ -1,0 +1,29 @@
+
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/dia-turnos",
+      "handler": "dia-turno.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/dia-turnos",
+      "handler": "dia-turno.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/dia-turnos/:id",
+      "handler": "dia-turno.findOne",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

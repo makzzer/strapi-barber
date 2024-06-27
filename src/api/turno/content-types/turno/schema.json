@@ -4,7 +4,7 @@
   "info": {
     "singularName": "turno",
     "pluralName": "turnos",
-    "displayName": "Turno",
+    "displayName": "Reservas",
     "description": ""
   },
   "options": {
@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "fechaReserva": {
-      "type": "datetime"
-    },
     "servicio": {
       "type": "relation",
       "relation": "oneToOne",
@@ -28,12 +25,20 @@
       "relation": "oneToOne",
       "target": "api::barbero.barbero"
     },
-    "admin_user": {
+    "diaHoraTurno": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "admin::user"
+      "target": "api::dia-turno.dia-turno"
     },
-    "estadoPago": {
+    "estado": {
+      "type": "boolean"
+    },
+    "cliente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cliente.cliente"
+    },
+    "horaTurno": {
       "type": "string"
     }
   }

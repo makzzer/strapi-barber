@@ -774,12 +774,15 @@ export interface ApiBarberoBarbero extends Schema.CollectionType {
     singularName: 'barbero';
     pluralName: 'barberos';
     displayName: 'Barbero';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     nombre: Attribute.String;
+    apellido: Attribute.String;
+    mail: Attribute.Email;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -804,15 +807,22 @@ export interface ApiClienteCliente extends Schema.CollectionType {
     singularName: 'cliente';
     pluralName: 'clientes';
     displayName: 'Cliente';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Nombre: Attribute.String;
+    nombre: Attribute.String;
     apellido: Attribute.String;
     email: Attribute.Email;
     password: Attribute.Password;
+    telefono: Attribute.Integer;
+    turnos: Attribute.Relation<
+      'api::cliente.cliente',
+      'oneToMany',
+      'api::turno.turno'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -831,12 +841,49 @@ export interface ApiClienteCliente extends Schema.CollectionType {
   };
 }
 
+export interface ApiDiaTurnoDiaTurno extends Schema.CollectionType {
+  collectionName: 'dia_turnos';
+  info: {
+    singularName: 'dia-turno';
+    pluralName: 'dia-turnos';
+    displayName: 'diaTurno';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    diaTurno: Attribute.Date;
+    horarios: Attribute.JSON;
+    barbero: Attribute.Relation<
+      'api::dia-turno.dia-turno',
+      'oneToOne',
+      'api::barbero.barbero'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::dia-turno.dia-turno',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::dia-turno.dia-turno',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductoProducto extends Schema.CollectionType {
   collectionName: 'productos';
   info: {
     singularName: 'producto';
     pluralName: 'productos';
-    displayName: 'servicio';
+    displayName: 'producto';
     description: '';
   };
   options: {
@@ -846,6 +893,7 @@ export interface ApiProductoProducto extends Schema.CollectionType {
     nombre: Attribute.String;
     duracion: Attribute.Integer;
     precio: Attribute.Integer;
+    senia: Attribute.Integer & Attribute.DefaultTo<2000>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -869,14 +917,13 @@ export interface ApiTurnoTurno extends Schema.CollectionType {
   info: {
     singularName: 'turno';
     pluralName: 'turnos';
-    displayName: 'Turno';
+    displayName: 'Reservas';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    fechaReserva: Attribute.DateTime;
     servicio: Attribute.Relation<
       'api::turno.turno',
       'oneToOne',
@@ -888,12 +935,18 @@ export interface ApiTurnoTurno extends Schema.CollectionType {
       'oneToOne',
       'api::barbero.barbero'
     >;
-    admin_user: Attribute.Relation<
+    diaHoraTurno: Attribute.Relation<
       'api::turno.turno',
       'oneToOne',
-      'admin::user'
+      'api::dia-turno.dia-turno'
     >;
-    estadoPago: Attribute.String;
+    estado: Attribute.Boolean;
+    cliente: Attribute.Relation<
+      'api::turno.turno',
+      'oneToOne',
+      'api::cliente.cliente'
+    >;
+    horaTurno: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -932,6 +985,7 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::barbero.barbero': ApiBarberoBarbero;
       'api::cliente.cliente': ApiClienteCliente;
+      'api::dia-turno.dia-turno': ApiDiaTurnoDiaTurno;
       'api::producto.producto': ApiProductoProducto;
       'api::turno.turno': ApiTurnoTurno;
     }

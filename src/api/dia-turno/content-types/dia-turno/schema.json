@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dia_turnos",
+  "info": {
+    "singularName": "dia-turno",
+    "pluralName": "dia-turnos",
+    "displayName": "diaTurno",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "diaTurno": {
+      "type": "date"
+    },
+    "horarios": {
+      "type": "json"
+    },
+    "barbero": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::barbero.barbero"
+    }
+  }
+}
